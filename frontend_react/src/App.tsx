@@ -2,11 +2,7 @@ import React from "react";
 import Auth from "./containers/auth";
 
 function App() {
-  return (
-    <div>
-      <Auth />
-    </div>
-  );
+  return <Auth />;
 }
 
 export default App;

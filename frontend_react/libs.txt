@@ -1,0 +1,16 @@
+npm i @mui/material @emotion/react @emotion/styled  sass react-router-dom  axios
+npm install antd --save
+npm install formik --save
+npm install @reduxjs/toolkit @reduxjs/toolkit yup
+/*
+npm install -D tailwindcss
+npx tailwindcss init
+
+content: ["./src/**/*.{html,js}"],
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*/
+
+
