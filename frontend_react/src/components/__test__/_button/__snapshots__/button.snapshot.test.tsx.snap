@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Jest Snapshot testing suite Matches DOM Snapshot 1`] = `
+<button
+  className="ant-btn css-dev-only-do-not-override-1rqnfsa ant-btn-default"
+  disabled={false}
+  onClick={[Function]}
+  style={Object {}}
+  type="button"
+>
+  <span>
+    first test
+  </span>
+</button>
+`;

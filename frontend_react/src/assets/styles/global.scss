@@ -2,6 +2,5 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'font.scss'
-
-
+@import "font";
+@import "mixins";
