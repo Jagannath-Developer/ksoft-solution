@@ -1,22 +1,10 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import { mergeRight, path, pathOr, prop } from "ramda";
-import _, { merge } from "lodash";
+import axios, { AxiosRequestConfig } from "axios";
 import queryString from "query-string";
+import { path, pathOr, prop } from "ramda";
+import { merge } from "lodash";
 
 axios.defaults.withCredentials = false;
 axios.defaults.timeout = Infinity;
-interface AxiosParams {
-  baseUrl: string;
-  headers: any;
-  method: string;
-}
-const config: AxiosParams = {
-  baseUrl: "https://jsonplaceholder.typicode.com/",
-  headers: {
-    Authorization: "",
-  },
-  method: "post",
-};
 
 export interface RequestConfig extends AxiosRequestConfig {
   contentType?: string;
@@ -30,6 +18,7 @@ export interface RequestConfig extends AxiosRequestConfig {
 type Header = {
   Authorization?: string;
   ["Content-Type"]: string;
+  ["X-Session-ID"]: string;
 };
 
 export type HTTPService = {
@@ -39,8 +28,6 @@ export type HTTPService = {
   post: <T>(options: Partial<RequestConfig>) => Promise<T>;
   put: <T>(options: Partial<RequestConfig>) => Promise<T>;
 };
-
-const instance: AxiosInstance = axios.create(config);
 
 export default ({ apiKey }: { apiKey: string }): HTTPService => {
   const encodeData = (
@@ -59,6 +46,26 @@ export default ({ apiKey }: { apiKey: string }): HTTPService => {
     }
     return allData;
   };
+
+  const getHeaders = (
+    contentType: string,
+    sessionToken?: string,
+    url?: string
+  ) => {
+    const headers: Header = {
+      "Content-Type": contentType,
+      "X-Session-ID": "",
+    };
+    if (sessionToken) headers.Authorization = `Bearer ${sessionToken}`;
+
+    const xSessionId = sessionStorage.getItem("xSessionId");
+    if (xSessionId && url?.includes("nabu-gateway")) {
+      headers["X-Session-ID"] = xSessionId;
+    }
+
+    return headers;
+  };
+
   const request = <T>({
     cancelToken,
     contentType = "application/x-www-form-urlencoded",
@@ -75,10 +82,7 @@ export default ({ apiKey }: { apiKey: string }): HTTPService => {
       .request<T>({
         cancelToken,
         data: encodeData(data, contentType, removeDefaultPostData),
-        headers: mergeRight(
-          getHeaders(contentType, sessionToken, url),
-          headers
-        ),
+        headers: getHeaders(contentType, sessionToken, url),
         method,
         url: `${url}${endPoint}`,
         ...options,
@@ -88,7 +92,7 @@ export default ({ apiKey }: { apiKey: string }): HTTPService => {
         const status = path(["response", "status"], error);
 
         if (typeof errorData === "string") throw errorData;
-        if (typeof status === "number") throw _.merge(errorData, { status });
+        if (typeof status === "number") throw merge(errorData, { status });
 
         return Promise.reject(error);
       })
