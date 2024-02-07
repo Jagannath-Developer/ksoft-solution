@@ -24,17 +24,19 @@ interface CButtonProps extends ButtonProps {
 const CButton: FC<CButtonProps> = ({
   onClick,
   children,
+  className,
   type,
   icon,
   size,
   shape,
   disabled,
   danger,
+  ghost,
   block,
 }): ReactElement => {
     return (
-        <Button>
-            first test
+        <Button type={type} className={className} ghost={ghost} size={size} block={block}>
+            {children}
         </Button>
     )
 };
