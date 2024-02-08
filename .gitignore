@@ -2,4 +2,10 @@
 /backend_nest/package-lock.json
 /frontend_react/node_modules
 /frontend_react/package-lock.json
+/microfrontend-angular/node_modules
+/microfrontend-angular/package-lock.json
+/microfrontend-vue/node_modules
+/microfrontend-vue/package-lock.json
+/microfrontend-next/node_modules
+/microfrontend-next/package-lock.json
 
