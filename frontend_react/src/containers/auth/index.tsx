@@ -1,12 +1,11 @@
 import { Input, Row, Col, Flex, Typography } from "antd";
+import { FaGooglePlusG } from "react-icons/fa";
 import { Divider } from "@mui/material";
 import { Button } from "../../components";
-import { IButton, ILables } from "./constant";
-import { FaGooglePlusG } from "react-icons/fa";
-import styles from "./index.module.scss";
-// import {  useSelector } from "react-redux";
 import { useAppSelector } from "../../context/store";
+import { IButton, ILables } from "./constant";
 import { selectAuth } from "./redux/selectors";
+import styles from "./index.module.scss";
 
 function Auth() {
   const { auth } = useAppSelector(selectAuth);
