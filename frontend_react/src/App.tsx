@@ -1,8 +1,11 @@
-import React from "react";
 import Auth from "./containers/auth";
-
+import NavBar from "./containers/navbar";
 function App() {
-  return <Auth />;
+  return (
+    <div>
+      <NavBar />
+      <Auth />
+    </div>
+  );
 }
-
 export default App;
