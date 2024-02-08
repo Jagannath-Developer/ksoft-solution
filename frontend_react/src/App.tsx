@@ -1,10 +1,10 @@
-import Auth from "./containers/auth";
-import NavBar from "./containers/navbar";
+// import Auth from "./containers/auth";
+import NavBar from "./components/navbar";
 function App() {
   return (
     <div>
       <NavBar />
-      <Auth />
+      {/* <Auth /> */}
     </div>
   );
 }
