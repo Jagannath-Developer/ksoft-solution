@@ -1,19 +1,15 @@
-.container{
-    //width: 30%;
-    //border: 0.5px solid ;
+.container {
+    width: 90%;
     padding: 20px;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    // border: 1px solid;
     border-radius: 7px;
-    //box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     font-family: Poppins_black;
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
     -ms-border-radius: 7px;
     -o-border-radius: 7px;
-}
-.marginTop{
-    margin-top: 20px;
 }

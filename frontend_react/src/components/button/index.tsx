@@ -1,21 +1,6 @@
-import { ReactElement, FC, ReactNode } from "react";
-import { Button, ConfigProviderProps } from "antd";
-import { ButtonProps, ButtonShape, ButtonType } from "antd/lib/button";
-
-type SizeType = ConfigProviderProps["componentSize"];
-
-interface Props {
-  type?: ButtonType;
-  icon?: ReactNode;
-  shape?: ButtonShape;
-  size?: SizeType;
-  disabled?: boolean;
-  className?: string;
-  ghost?: boolean;
-  danger?: boolean;
-  block?: boolean;
-  children: ReactNode;
-}
+import { ReactElement, FC } from "react";
+import { Button } from "antd";
+import { ButtonProps } from "antd/lib/button";
 
 interface CButtonProps extends ButtonProps {
   onClick?: () => void;
@@ -33,12 +18,22 @@ const CButton: FC<CButtonProps> = ({
   danger,
   ghost,
   block,
+  color,
+  style
 }): ReactElement => {
-    return (
-        <Button type={type} className={className} ghost={ghost} size={size} block={block}>
-            {children}
-        </Button>
-    )
+  return (
+    <Button
+      type={type}
+      className={className}
+      ghost={ghost}
+      size={size}
+      block={block}
+      color={color}
+      children={children}
+      style={style}
+      onClick={onClick}
+    />
+  );
 };
 
 export default CButton;

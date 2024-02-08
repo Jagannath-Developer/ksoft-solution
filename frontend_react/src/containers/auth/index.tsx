@@ -1,129 +1,116 @@
-import React from "react";
-import styles from "./index.module.scss";
-import { Input } from "antd";
-import { Divider, Typography } from "@mui/material";
+import { Input, Row, Col, Flex, Typography } from "antd";
+import { Divider } from "@mui/material";
 import { Button } from "../../components";
-interface IAuthProps {
-  setToggle: boolean;
-}
+import { IButton, ILables } from "./constant";
+import { FaGooglePlusG } from "react-icons/fa";
+import styles from "./index.module.scss";
+// import {  useSelector } from "react-redux";
+import { useAppSelector } from "../../context/store";
+import { selectAuth } from "./redux/selectors";
+
 function Auth() {
+  const { auth } = useAppSelector(selectAuth);
+
+  console.log(auth);
   const SignIn = () => {
     return (
-      <div>
-        <Typography variant="h6" sx={{ fontWeight: "bold", marginTop: 2 }}>
-          Sign In
-        </Typography>
-
-        <div className={styles.marginTop}>
-          <Typography sx={{ fontSize: 15, fontWeight: 500 }}>
-            Phone Number or Email
-          </Typography>
+      <Row className={`animate-none shadow-2xl lg:w-3/12 ${styles.container}`}>
+        {auth ? (
+          <Col span={24}>
+            <Typography
+              className="font-bold text-2xl mt-2"
+              children={ILables.SIGNUP}
+            />
+          </Col>
+        ) : (
+          <Col span={24}>
+            <Typography
+              className="font-bold text-2xl mt-2"
+              children={ILables.LOGIN}
+            />
+          </Col>
+        )}
+        {auth && (
+          <Col span={24} className="mt-4">
+            <label className="font-semibold" children={ILables.NAME} />
+            <Input
+              className="mt-2"
+              type="text"
+              placeholder="Enter your name"
+              variant="filled"
+            />
+          </Col>
+        )}
+        <Col span={24} className="mt-4">
+          <label className="font-semibold" children={ILables.PHONE} />
           <Input
-            placeholder="Enter your phone number or email"
+            className="mt-2"
+            type="text"
+            placeholder="Enter your number or email"
             variant="filled"
-            className="mt-3"
           />
-        </div>
-        <div className="text-right  mt-5">
-          <Typography className="text-green-600" sx={{ fontSize: 14 }}>
-            Getting Trouble?
-          </Typography>
-        </div>
-        <Button
-          className="mt-6  bg-green-900 text-white"
-          size="large"
-          block={true}
-        >
-          Sign In
-        </Button>
-        <div className="mt-6">
-          <Divider>
-            <Typography>Or using other method</Typography>
-          </Divider>
-        </div>
+        </Col>
+        {auth && (
+          <Col span={24} className="mt-4">
+            <label className="font-semibold" children={ILables.PASSWORD} />
+            <Input
+              className="mt-2"
+              type="text"
+              placeholder="Enter your password"
+              variant="filled"
+            />
+          </Col>
+        )}
+        <Col span={24} className="mt-6">
+          <Flex justify="end">
+            <Typography
+              className="text-green-600 font-semibold"
+              children={ILables.TROUBLE}
+            />
+          </Flex>
+        </Col>
 
-        <Button
-          className="my-6"
-          type="primary"
-          ghost={true}
-          block={true}
-          size="large"
-        >
-          Sign In with Google
-        </Button>
-      </div>
+        {auth ? (
+          <Col span={24} className="mt-6">
+            <Button
+              block={true}
+              size="large"
+              children={IButton.SIGNUP}
+              className="bg-green-900 text-white"
+            />
+          </Col>
+        ) : (
+          <Col span={24} className="mt-6">
+            <Button
+              block={true}
+              size="large"
+              children={IButton.LOGIN}
+              className="bg-green-900 text-white"
+            />
+          </Col>
+        )}
+
+        <Col span={24} className="mt-6">
+          <Divider children={ILables.METH0DS} />
+        </Col>
+        <Col span={24} className="my-6">
+          <Button
+            block={true}
+            size="large"
+            children={
+              <Flex justify="center" align="center" gap={10}>
+                <FaGooglePlusG color="red" />
+                {IButton.GOOGLE}
+              </Flex>
+            }
+            className=" text-blck"
+          />
+        </Col>
+      </Row>
     );
   };
-  const SignUp = () => {
-    return (
-      <div>
-        <Typography variant="h6" sx={{ fontWeight: "bold", marginTop: 2 }}>
-          Sign In
-        </Typography>
 
-        <div className={styles.marginTop}>
-          <Typography sx={{ fontSize: 15, fontWeight: 500 }}>Name</Typography>
-          <Input
-            placeholder="Enter your name"
-            variant="filled"
-            className="mt-3"
-          />
-        </div>
-        <div className={styles.marginTop}>
-          <Typography sx={{ fontSize: 15, fontWeight: 500 }}>
-            Phone Number or Email
-          </Typography>
-          <Input
-            placeholder="Enter your phone number or email"
-            variant="filled"
-            className="mt-3"
-          />
-        </div>
-        <div className={styles.marginTop}>
-          <Typography sx={{ fontSize: 15, fontWeight: 500 }}>
-            Password
-          </Typography>
-          <Input
-            placeholder="Enter your password"
-            variant="filled"
-            className="mt-3"
-          />
-        </div>
-        <div className="text-right  mt-5">
-          <Typography className="text-green-600" sx={{ fontSize: 14 }}>
-            Getting Trouble?
-          </Typography>
-        </div>
-        <Button
-          className="mt-6  bg-green-900 text-white"
-          size="large"
-          block={true}
-        >
-          Sign Up
-        </Button>
-        <div className="mt-6">
-          <Divider>
-            <Typography>Or using other method</Typography>
-          </Divider>
-        </div>
-
-        <Button
-          className="my-6"
-          type="primary"
-          ghost={true}
-          block={true}
-          size="large"
-        >
-          Sign In with Google
-        </Button>
-      </div>
-    );
-  };
-  return (
-    <div className={`${styles.container} border shadow-2xl w-full  lg:w-3/12`}>
-      <SignIn />
-    </div>
-  );
+  return <SignIn />;
 }
 
 export default Auth;
