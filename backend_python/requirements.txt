@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+supabase
+mysql-connector-python
+uvicorn
+SQLAlchemy
+SQLAlchemy-Utils
+pydantic
+pandas
+loguru
