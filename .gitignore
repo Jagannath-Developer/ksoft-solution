@@ -8,4 +8,5 @@
 /microfrontend-vue/package-lock.json
 /microfrontend-next/node_modules
 /microfrontend-next/package-lock.json
+/backend_python/.venv/Lib
 
