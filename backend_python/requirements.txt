@@ -8,3 +8,5 @@ SQLAlchemy-Utils
 pydantic
 pandas
 loguru
+aisql
+pymysql

@@ -17,7 +17,7 @@ env_file = os.environ.get("ENV_FILE") if "ENV_FILE" in os.environ else os.path.j
 
 config = Config(env_file)
 
-
+print(config('MYSQL_USERNAME'),'username')
 # =========== PROJECT ==========
 PROJECT_NAME: str = config("PROJECT_NAME", default="Waterdip")
 PREFIX:str = config("API_VERSION",default='/api/v1')
@@ -26,6 +26,7 @@ UNIT_TEST = config("UNIT_TEST", cast=bool, default=False)
 DEPLOYMENT_ENV: str = config("DEPLOYMENT_ENV", default="local")
 ALLOWED_HOSTS: List[str] = config("ALLOWED_HOSTS", cast=CommaSeparatedStrings, default="*")
 AIO_CLIENT_TOUT_SEC: int = config("AIO_CLIENT_TOUT_SEC", cast=int, default=10)
+# DATABASE_URL:str = f'mysql+pymysql://{config('MYSQL_USERNAME')}:{config('MYSQL_PASSWORD')}@{config('MYSQL_HOST')}:{config('MYSQL_PORT')}/classicmodels'
 
 
 # =========== LOGGING ==========
